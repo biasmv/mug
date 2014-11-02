@@ -14,8 +14,7 @@ def parse_args(args):
 
 FILE_OF_MULTIPLE_REPOSITORIES_STAGED_FOR_COMMIT='''\
 Files of multiple repositories are staged for commit. Split the
-commits by repository.
-'''
+commits by repository.'''
 def run(repo, output, args):
     opts = parse_args(args)
     if opts.all:

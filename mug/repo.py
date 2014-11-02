@@ -88,9 +88,9 @@ class MugRepository:
                     continue
                 repo_file_name_map[sub].append(rel_path)
                 break
-        else:
-            rel_path = os.path.relpath(file_name, main.workdir)
-            repo_file_name_map[main].append(rel_path)
+            else:
+                rel_path = os.path.relpath(file_name, main.workdir)
+                repo_file_name_map[main].append(rel_path)
         return repo_file_name_map
 
     @staticmethod

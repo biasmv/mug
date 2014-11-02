@@ -20,6 +20,7 @@ Changes not staged for commit:
 def write_untracked(untracked, output):
     if len(untracked) == 0:
         return
+    output.add_separator()
     output.add_line(UNTRACKED_HEADER)
     for u in untracked:
         output.add_line('    %s' % os.path.relpath(u, os.getcwd()))

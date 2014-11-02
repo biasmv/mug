@@ -22,7 +22,6 @@ Changes to be committed:
 
 ERROR: Files of multiple repositories are staged for commit. Split the
 commits by repository.
-
 """
 def test_commit_with_untracked_files_but_nothing_to_commit_shows_status(simplerepo):
     output_stream = output.Output()
