@@ -79,12 +79,16 @@ def collect_repo_status(repo, working_dirs, combined_status):
         combined_status[s].append(abs_path)
 
 
-def run(repo, output, args):
-    all_repos = repo.all_repositories
+def status_all(repo):
     combined_status = collections.defaultdict(list)
+    all_repos = repo.all_repositories
     working_dirs = set([r.workdir for r in all_repos])
     for repo in all_repos:
         collect_repo_status(repo, working_dirs, combined_status)
+    return combined_status
+
+def run(repo, output, args):
+    combined_status = status_all(repo)
     write_output(combined_status, output)
 
 
