@@ -13,7 +13,7 @@ def simplerepo(request):
         'file_a.txt' : 'abc\nabc\n',
         'file_b.txt' : 'xyz\nabc\n',
         '.mugules' : 'mod_a: ignore/mod_a\n',
-        '.gitignore' : 'mod_a\n'
+        '.gitignore' : 'mod_a\n*.hidden\n'
     }
     mug.utils.write_and_commit(repo, contents, 'initial commit')
     mod_a = pygit2.init_repository('ignore/simplerepo/mod_a')

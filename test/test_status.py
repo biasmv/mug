@@ -21,11 +21,33 @@ Changes not staged for commit:
     modified: ignore/simplerepo/file_a.txt
 """
 
+UNTRACKED_FILE_OUTPUT="""\
+Untracked files:
+  (use "mug add <file> ..." to include in what will be committed)
+
+    ignore/simplerepo/file_x.txt
+
+"""
 def test_status_output_working_tree_modified(simplerepo):
     utils.write(simplerepo.workdir, { 'file_a.txt' : 'one\ntwo\three\four\n' })
-
     repository = repo.MugRepository('ignore/simplerepo')
     o_stream = output.Output()
     status.run(repository, o_stream, [])
     assert o_stream.value() == MODIFIED_NOT_STAGED_OUTPUT
+
+def test_status_untracked_files(simplerepo):
+    utils.write(simplerepo.workdir, { 'file_x.txt' : 'one\ntwo\three\four\n' })
+    repository = repo.MugRepository('ignore/simplerepo')
+    o_stream = output.Output()
+    status.run(repository, o_stream, [])
+    print o_stream.value()
+    assert o_stream.value() == UNTRACKED_FILE_OUTPUT
+
+def test_status_output_ignored(simplerepo):
+    utils.write(simplerepo.workdir, { 'file_x.hidden' : 'one\ntwo\three\four\n' })
+    repository = repo.MugRepository('ignore/simplerepo')
+    o_stream = output.Output()
+    status.run(repository, o_stream, [])
+    print o_stream.value()
+    assert o_stream.value() == NO_CHANGES_OUTPUT
 
