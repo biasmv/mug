@@ -40,7 +40,6 @@ def test_status_untracked_files(simplerepo):
     repository = repo.MugRepository('ignore/simplerepo')
     o_stream = output.Output()
     status.run(repository, o_stream, [])
-    print o_stream.value()
     assert o_stream.value() == UNTRACKED_FILE_OUTPUT
 
 def test_status_output_ignored(simplerepo):
@@ -48,6 +47,5 @@ def test_status_output_ignored(simplerepo):
     repository = repo.MugRepository('ignore/simplerepo')
     o_stream = output.Output()
     status.run(repository, o_stream, [])
-    print o_stream.value()
     assert o_stream.value() == NO_CHANGES_OUTPUT
 
