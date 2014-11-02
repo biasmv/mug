@@ -92,4 +92,4 @@ class Status(verb.Verb):
 
 def run(repo, output, args):
   verb = Status()
-  return verb.run(repo, output)
+  return verb.run(repo, output, args)
