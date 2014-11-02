@@ -30,8 +30,7 @@ def write_and_commit(repo, contents, message, author=DEFAULT_AUTHOR,
     tree_id = index.write_tree()
     parents = []
     if not repo.is_empty:
-        tree = repo.revparse_single('HEAD').tree
-        parents.append(tree.oid)
+        parents.append(repo.revparse_single('HEAD').oid)
     repo.create_commit('HEAD', author, committer, message, tree_id, parents) 
     index.write()
 

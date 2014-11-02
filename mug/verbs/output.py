@@ -23,3 +23,7 @@ class Output:
 
     def value(self):
         return self._buffer.getvalue()
+
+    def add_error(self, text):
+        self._buffer.write('ERROR: ')
+        self.add_line(text)

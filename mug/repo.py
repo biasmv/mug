@@ -1,5 +1,6 @@
 import pygit2
 import os
+import collections
 
 class NoRepositoryFound(IOError):
     def __init__(self, initial_dir):
@@ -71,6 +72,26 @@ class MugRepository:
             if next_dir == current:
                 raise NoRepositoryFound(initial_dir)
             current = next_dir
+
+    def files_by_repo(self, file_names):
+        """
+        Associates file names with the correct repository. Returns a map of repo -> 
+        relative_filenames. 
+        """
+        main = self.main_repository
+        sub_repositories = self.sub_repositories
+        repo_file_name_map = collections.defaultdict(list)
+        for file_name in file_names:
+            for sub in sub_repositories:
+                rel_path = os.path.relpath(file_name, sub.workdir)
+                if rel_path.startswith('..'):
+                    continue
+                repo_file_name_map[sub].append(rel_path)
+                break
+        else:
+            rel_path = os.path.relpath(file_name, main.workdir)
+            repo_file_name_map[main].append(rel_path)
+        return repo_file_name_map
 
     @staticmethod
     def read_mugules_file(directory):

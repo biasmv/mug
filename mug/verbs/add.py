@@ -1,19 +1,7 @@
-import pygit2
-import os
-
 def run(repo, output, file_names):
-    sub_repositories = repo.sub_repositories
-    main = repo.main_repository
-    index = main.index
-    for file_name in file_names:
-        for sub in sub_repositories:
-            rel_path = os.path.relpath(file_name, sub.workdir)
-            if rel_path.startswith('..'):
-                continue
-            index = sub.index
-            break
-        else:
-            rel_path = os.path.relpath(file_name, main.workdir)
-    index.add(rel_path)
-    index.write()
-
+    repo_file_name_map = repo.files_by_repo(file_names)
+    for repository, file_names in repo_file_name_map.iteritems():
+        index = repository.index
+        for file_name in file_names:
+            index.add(file_name)
+        index.write()

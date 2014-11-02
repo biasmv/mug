@@ -55,7 +55,8 @@ def write_not_staged_for_commit(combined_status, output):
                                       pygit2.GIT_STATUS_WT_DELETED,
                                       combined_status, output)
 def write_output(combined_status, output):
-    if len(combined_status) == 0:
+    status_count = sum([len(s) for s in combined_status.values()])
+    if status_count == 0:
         output.add_line('nothing to commit, working directory clean')
         return
     write_to_be_committed(combined_status, output)
