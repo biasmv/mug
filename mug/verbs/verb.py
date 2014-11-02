@@ -60,4 +60,11 @@ class Verb:
       self._repositories = self._discover()
     return self._repositories
 
+  @property
+  def main_repository(self):
+    return self.all_repositories[0]
+  @property
+  def all_submugules(self):
+    return self.all_repositories[1:]
+
 
