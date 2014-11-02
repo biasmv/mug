@@ -1,2 +1,7 @@
 *.pyc
 ignore
+.Python
+/bin
+/include
+/lib
+

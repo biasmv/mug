@@ -1,7 +1,8 @@
 import importlib
 VERBS = [
     'add',
-    'status'
+    'status',
+    'commit'
 ]
 
 def execute(args):
