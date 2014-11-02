@@ -73,7 +73,7 @@ class Status(verb.Verb):
             abs_path = os.path.join(repo.workdir, name)
             # skip paths pointing to the submodule. Typically these directories 
             # should be added to gitignore files, but it's better to just not 
-            # show the mat all in the status output.
+            # show them at all in the status output.
             if abs_path in working_dirs:
                 continue
             # we don't care about ignored files or files that are up-to-date

@@ -34,7 +34,7 @@ class MugRepository:
                 raise NoSuchMuguleFound(repo_name, sub_repo_path)
 
     @property
-    def mugules(self):
+    def sub_repositories(self):
         """
         The mugules contained in this mug repository
         """

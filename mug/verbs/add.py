@@ -5,24 +5,23 @@ import os
 class Add(verb.Verb):
     def __init__(self):
         verb.Verb.__init__(self, 'add')
-    def add(self, file_names):
-        submugules = self.all_submugules
-        main = self.main_repository
+    def run(self, repo, output, file_names):
+        sub_repositories = repo.sub_repositories
+        main = repo.main_repository
+        index = main.index
         for file_name in file_names:
-            for sub in submugules:
+            for sub in sub_repositories:
                 rel_path = os.path.relpath(file_name, sub.workdir)
                 if rel_path.startswith('..'):
                     continue
                 index = sub.index
-                index.add(rel_path)
-                index.write()
                 break
             else:
-                index = main.index
-                index.add(rel_path)
-                index.write()
+                rel_path = os.path.relpath(file_name, main.workdir)
+        index.add(rel_path)
+        index.write()
 
 
-def run(args):
+def run(repo, output, args):
   verb = Add()
-  verb.add(args)
+  verb.add(repo, output, args)
