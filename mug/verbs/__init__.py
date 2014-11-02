@@ -1,4 +1,8 @@
 import importlib
+import mug.repo
+import os
+import output
+
 VERBS = [
     'add',
     'status',
@@ -15,4 +19,7 @@ def execute(args):
     print 'ERROR: don\'t know what you mean by %s' % verb
     return False
   module = importlib.import_module('mug.verbs.%s' % verb)
-  module.run(args[1:])
+  repo = mug.repo.MugRepository.discover(os.getcwd())
+  output_stream = output.Output()
+  module.run(repo, output_stream, args[1:])
+  print output_stream.value()

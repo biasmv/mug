@@ -39,6 +39,13 @@ class MugRepository:
         The mugules contained in this mug repository
         """
         return self._mugules
+    @property
+    def all_repositories(self):
+        return [self._repo] + self._mugules
+
+    @property
+    def main_repository(self):
+        return self._repo
 
     @staticmethod
     def discover(initial_path):
