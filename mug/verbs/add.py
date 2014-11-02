@@ -1,5 +1,4 @@
 import pygit2
-import verb
 import os
 
 def run(repo, output, file_names):

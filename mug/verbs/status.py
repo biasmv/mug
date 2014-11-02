@@ -1,6 +1,5 @@
 import os
 import pygit2
-import verb
 import collections
 
 UNTRACKED_HEADER = """\
